@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Play: Pre-Flop Decision Practice</h1>
+<button onclick="dealHand()">Deal Hand</button>
+<div id="hand-info"></div>
+<div id="response-buttons" style="display: none;">
+    <button onclick="respond('Fold')">Fold</button>
+    <button onclick="respond('Call')">Call</button>
+    <button onclick="respond('Raise')">Raise</button>
+</div>
+<div id="result"></div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
