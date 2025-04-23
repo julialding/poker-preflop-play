@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="learn-container">
+        <h1 class="text-center mb-4">Learn Poker Pre-Flop Betting</h1>
+        
+        <div class="card shadow-sm p-4">
+            <h2 class="card-title">Lesson 1: Table Positions</h2>
+            
+            <!-- Position Image -->
+            <div class="text-center my-4">
+                <img src="static/images/poker_pos.png" 
+                     alt="Poker Table Positions" 
+                     class="img-fluid rounded" 
+                     style="max-width: 600px;">
+            </div>
+
+            <div class="lesson-content">
+                <h3 class="mb-3">Position Overview</h3>
+                <p>Pre-flop decisions are heavily influenced by your position at the table. Understanding position is crucial for successful poker play.</p>
+                
+                <div class="position-explanations mt-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4 class="text-primary">Early Position (EP)</h4>
+                            <ul>
+                                <li>First positions to act after the blinds</li>
+                                <li>Play tight range – premium hands only</li>
+                                <li>Recommended hands: AA, KK, QQ, AKs</li>
+                                <li>Most difficult position to play from</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4 class="text-success">Middle Position (MP)</h4>
+                            <ul>
+                                <li>More flexibility than Early Position</li>
+                                <li>Can play moderate range</li>
+                                <li>Include premium hands and strong suited connectors</li>
+                                <li>Consider players still to act</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4 class="text-info">Late Position (LP)</h4>
+                            <ul>
+                                <li>Best position to play from</li>
+                                <li>Can play wider range of hands</li>
+                                <li>Opportunity to steal blinds</li>
+                                <li>More information about opponents' actions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4 class="text-warning">Blinds (SB/BB)</h4>
+                            <ul>
+                                <li>Small Blind: Worst position post-flop</li>
+                                <li>Big Blind: Can defend more widely</li>
+                                <li>Already invested in the pot</li>
+                                <li>Need to be selective with defense ranges</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="d-flex justify-content-between mt-4">
+            <a href="/learn" class="btn btn-secondary">Back</a>
+            <a href="/learn/2" class="btn btn-primary">Next Lesson</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.position-explanations .card {
+    transition: transform 0.2s;
+}
+
+.position-explanations .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.lesson-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.lesson-content ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.lesson-content ul li:last-child {
+    border-bottom: none;
+}
+</style>
+{% endblock %}

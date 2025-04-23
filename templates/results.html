@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1>Quiz Results</h1>
+        <div class="score-display mt-4">
+            <h2>Your Score: {{ "%.1f"|format(score) }}%</h2>
+            <p class="lead">You got {{ correct_answers }} out of {{ total_questions }} questions correct!</p>
+        </div>
+    </div>
+
+    <div class="history-section">
+        <h3>Your Answers:</h3>
+        <div class="list-group">
+            {% for entry in history %}
+            <div class="list-group-item {% if entry.is_correct %}list-group-item-success{% else %}list-group-item-danger{% endif %}">
+                <h5 class="mb-1">Question {{ entry.quiz_id }}</h5>
+                <p class="mb-1">Your decision: {{ entry.decision }} {% if entry.amount > 0 %}({{ entry.amount }}){% endif %}</p>
+                <small>{{ "Correct" if entry.is_correct else "Incorrect" }} - {{ entry.timestamp }}</small>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="/" class="btn btn-primary btn-lg">Back to Home</a>
+        <a href="/play/1" class="btn btn-success btn-lg ml-3">Try Again</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="practice-container">
+    <h1>{% block play_title %}Practice: Pre-Flop Decision Training{% endblock %}</h1>
+
+    {% block play_content %}{% endblock %}
+    
+    <div class="action-buttons-container" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+        <button class="btn btn-secondary action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Call', 4)">Call 4</button>
+        <button class="btn btn-primary action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Raise', 12)">Raise 12</button>
+        <button class="btn btn-danger action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('AllIn', 200)">All in 200</button>
+        <button class="btn btn-dark action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Fold', 0)">Fold</button>
+    </div>
+
+    <div id="result" class="result-display mt-3"></div>
+</div>
+
+<script>
+function submitDecision(decision, amount) {
+    fetch('/submit-decision', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            decision: decision,
+            amount: amount
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        window.location.href = '/results';
+    });
+}
+</script>
+{% endblock %} 

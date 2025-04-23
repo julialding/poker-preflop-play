@@ -1,0 +1,68 @@
+{
+    "quiz_pages": [
+        {
+            "id": 1,
+            "title": "Early Position with Aces",
+            "image": "poker_AA_UTG.png",
+            "description": "You're in early position with pocket Aces. What's your play?",
+            "buttons": {
+                "call": {"amount": 4, "correct": false},
+                "raise": {"amount": 12, "correct": true},
+                "allin": {"amount": 200, "correct": false},
+                "fold": {"amount": 0, "correct": false}
+            },
+            "feedback": {
+                "correct": "Correct! Raising 12BB in early position with Aces is the optimal play.",
+                "incorrect": "Not quite. With Aces in early position, you want to raise to build the pot while not scaring away too many players."
+            }
+        },
+        {
+            "id": 2,
+            "title": "Ace King in Cutoff Facing Raise",
+            "image": "poker_AKo_Cutoff.png",
+            "description": "You're in the cutoff with AKs. What's your play?",
+            "buttons": {
+                "call": {"amount": 16, "correct": false},
+                "raise": {"amount": 50, "correct": true},
+                "allin": {"amount": 200, "correct": false},
+                "fold": {"amount": 0, "correct": false}
+            },
+            "feedback": {
+                "correct": "Correct! AKo is a strong hand that plays well in position against the raiser.",
+                "incorrect": "With AKo in the cutoff, raising is typically the best play to take initiative and potentially win without seeing a flop while dominating many strong hands like AQ and KQ."
+            }
+        },
+        {
+            "id": 3,
+            "title": "Small Blind with Suited Connectors",
+            "image": "poker_87s_SB.png",
+            "description": "You're in the small blind with 87s facing a raise. What's your play?",
+            "buttons": {
+                "call": {"amount": 12, "correct": false},
+                "raise": {"amount": 30, "correct": true},
+                "allin": {"amount": 200, "correct": false},
+                "fold": {"amount": 0, "correct": true}
+            },
+            "feedback": {
+                "correct": "Correct! Out of position, we want to fold or 3-bet bluff -- this may get a nice fold from a stronger hand, or your cards still have great chances against big cards.",
+                "incorrect": "With suited connectors in the small blind, folding is safe and re-raising puts fold pressure on opponents and allows you to potentially win a big pot when you hit a straight or flush."
+            }
+        },
+        {
+            "id": 4,
+            "title": "Big Blind with Small Suited Connectors",
+            "image": "poker_65s_BB.png",
+            "description": "You're in the big blind with 65s facing a raise. What's your play?",
+            "buttons": {
+                "call": {"amount": 4, "correct": true},
+                "raise": {"amount": 12, "correct": false},
+                "allin": {"amount": 200, "correct": false},
+                "fold": {"amount": 0, "correct": false}
+            },
+            "feedback": {
+                "correct": "Correct! Calling with suited connectors in position is a good play.",
+                "incorrect": "With suited connectors in the big blind, calling allows you to see a flop cheaply and potentially win a big pot when you hit."
+            }
+        }
+    ]
+} 
