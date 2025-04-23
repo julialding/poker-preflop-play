@@ -8,7 +8,7 @@ hands = ["AA", "KK", "QQ", "AKs", "AQs", "AJs", "KQs", "JTs", "T9s", "98s"]
 
 @app.route('/')
 def index():
-    return render_template('layout.html')
+    return render_template('home.html')
 
 @app.route('/learn')
 def learn():
@@ -32,6 +32,10 @@ def get_hand():
     hand = random.choice(hands)
     position = random.choice(positions)
     return jsonify({"hand": hand, "position": position})
+
+@app.route('/results')
+def show_results():
+    pass
 
 if __name__ == '__main__':
    app.run(debug=True, port=5001)

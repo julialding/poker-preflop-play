@@ -1,18 +1,41 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="home-container">
-    <h1 class="main-title">Poker Preflop Trainer</h1>
-    <div class="split-layout">
-        <div class="home-section">
-            <h2>Learn</h2>
-            <p>Master the fundamentals of preflop poker strategy.</p>
-            <a href="/learn" class="home-button">Start Learning</a>
+
+<div class="container mt-5">
+    <!-- Title Section -->
+    <div class="text-center mb-4">
+        <h1 class="main-title">Poker Preflop Play</h1>
+        <img src="https://cdn-icons-png.flaticon.com/512/1585/1585503.png" alt="Playing Cards Logo" class="img-fluid" style="max-width: 100px;">
+    </div>
+
+    <!-- Learn and Practice Sections -->
+    <div class="row text-center">
+        <!-- Learn Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Learn</h2>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAcE2oIQrbHMBHA6jZh54ogSVd9cuZK4-NYg&s" 
+                         alt="Learning Icon" class="img-fluid mb-3" style="max-height: 200px;">
+                    <br>
+                    <a href="/learn" class="btn btn-primary">Start Learning</a>
+                </div>
+            </div>
         </div>
-        <div class="home-section">
-            <h2>Practice</h2>
-            <p>Test your skills with interactive hand scenarios.</p>
-            <a href="/play" class="home-button">Start Practice</a>
+
+        <!-- Practice Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Practice</h2>
+                    <img src="https://static.vecteezy.com/system/resources/previews/017/057/728/non_2x/brain-practice-icon-suitable-for-a-wide-range-of-digital-creative-projects-free-vector.jpg" 
+                         alt="Practice Icon" class="img-fluid mb-3" style="max-height: 200px;">
+                    <br>
+                    <a href="/play" class="btn btn-success">Start Practice</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 {% endblock %}
