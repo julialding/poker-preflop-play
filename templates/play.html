@@ -1,13 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Play: Pre-Flop Decision Practice</h1>
-<button onclick="dealHand()">Deal Hand</button>
-<div id="hand-info"></div>
-<div id="response-buttons" style="display: none;">
-    <button onclick="respond('Fold')">Fold</button>
-    <button onclick="respond('Call')">Call</button>
-    <button onclick="respond('Raise')">Raise</button>
+<div class="practice-container">
+    <h1>Practice: Pre-Flop Decision Training</h1>
+    
+    <div class="practice-area">
+        <button id="deal-button" onclick="dealHand()">Deal New Hand</button>
+        
+        <div id="hand-info" class="hand-display"></div>
+        
+        <div id="response-buttons" class="action-buttons" style="display: none;">
+            <button class="action-button fold" onclick="respond('Fold')">Fold</button>
+            <button class="action-button call" onclick="respond('Call')">Call</button>
+            <button class="action-button raise" onclick="respond('Raise')">Raise</button>
+        </div>
+        
+        <div id="result" class="result-display"></div>
+    </div>
 </div>
-<div id="result"></div>
+
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}

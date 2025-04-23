@@ -1,19 +1,237 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: #f0f0f0;
+    background-color: #f5f5f5;
+    color: #333;
 }
-nav {
-    background: #333;
-    color: #fff;
-    padding: 10px;
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
-nav a {
-    color: #fff;
-    margin: 0 10px;
+
+/* Navigation Bar */
+.main-nav {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
     text-decoration: none;
 }
-.container {
-    padding: 20px;
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* Home Page */
+.home-container {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #2c3e50;
+}
+
+.split-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.home-section {
+    flex: 1;
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.home-section:hover {
+    transform: translateY(-5px);
+}
+
+.home-section h2 {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.home-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background-color: #2980b9;
+}
+
+/* Learn Pages */
+.learn-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.learn-container h1 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.learn-container h2 {
+    color: #3498db;
+    margin-top: 30px;
+}
+
+.learn-container h3 {
+    color: #2c3e50;
+    margin-top: 20px;
+}
+
+.lesson-content {
+    margin-bottom: 40px;
+}
+
+.lesson-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.lesson-nav-button {
+    padding: 10px 25px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.lesson-nav-button:hover {
+    background-color: #2980b9;
+}
+
+.lesson-nav-button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Practice Page */
+.practice-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.practice-area {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#deal-button {
+    padding: 12px 30px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#deal-button:hover {
+    background-color: #27ae60;
+}
+
+.hand-display {
+    margin: 25px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    min-height: 30px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.action-button {
+    padding: 10px 25px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.action-button:hover {
+    opacity: 0.9;
+}
+
+.fold {
+    background-color: #e74c3c;
+}
+
+.call {
+    background-color: #3498db;
+}
+
+.raise {
+    background-color: #f39c12;
+}
+
+.result-display {
+    margin-top: 25px;
+    font-size: 1.1rem;
+    min-height: 30px;
+    font-weight: 500;
 }

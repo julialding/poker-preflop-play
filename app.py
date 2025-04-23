@@ -8,7 +8,20 @@ hands = ["AA", "KK", "QQ", "AKs", "AQs", "AJs", "KQs", "JTs", "T9s", "98s"]
 
 @app.route('/')
 def index():
+    return render_template('layout.html')
+
+@app.route('/learn')
+def learn():
     return render_template('learn.html')
+
+@app.route('/learn/<int:page_id>')
+def learn_page(page_id):
+    if page_id == 2:
+        return render_template('learn_page_2.html')
+    elif page_id == 3:
+        return render_template('learn_page_3.html')
+    else:
+        return render_template('learn.html')
 
 @app.route('/play')
 def play():
@@ -21,4 +34,4 @@ def get_hand():
     return jsonify({"hand": hand, "position": position})
 
 if __name__ == '__main__':
-   app.run(debug = True, port=5001)
+   app.run(debug=True, port=5001)
