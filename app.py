@@ -54,6 +54,8 @@ def learn_page(page_id):
         return render_template('learn.html')
     elif page_id == 3:
         return render_template('learn_page_3.html')
+    elif page_id == 0:
+        return render_template('learn_page_0.html')
     else:
         return render_template('learn_pos.html')
 
