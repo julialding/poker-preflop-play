@@ -1,22 +1,66 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="practice-container">
-    <h1>Practice: Pre-Flop Decision Training</h1>
-    
+    <h1>{{ quiz.title }}</h1>
+    <p class="lead">{{ quiz.description }}</p>
+
     <div class="practice-area">
-        <button id="deal-button" onclick="dealHand()">Deal New Hand</button>
-        
-        <div id="hand-info" class="hand-display"></div>
-        
-        <div id="response-buttons" class="action-buttons" style="display: none;">
-            <button class="action-button fold" onclick="respond('Fold')">Fold</button>
-            <button class="action-button call" onclick="respond('Call')">Call</button>
-            <button class="action-button raise" onclick="respond('Raise')">Raise</button>
-        </div>
-        
-        <div id="result" class="result-display"></div>
+        <img src="{{ url_for('static', filename='images/' + quiz.image) }}"
+            alt="{{ quiz.title }}" 
+            class="img-fluid rounded" 
+            style="max-width: 600px;">
+    </div>
+    
+    <div class="action-buttons-container" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+        <button class="btn btn-secondary action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Call', {{ quiz.buttons.call.amount }})">Call {{ quiz.buttons.call.amount }}</button>
+        <button class="btn btn-primary action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Raise', {{ quiz.buttons.raise.amount }})">Raise {{ quiz.buttons.raise.amount }}</button>
+        <button class="btn btn-danger action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('AllIn', {{ quiz.buttons.allin.amount }})">All in {{ quiz.buttons.allin.amount }}</button>
+        <button class="btn btn-dark action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Fold', {{ quiz.buttons.fold.amount }})">Fold</button>
+    </div>
+
+    <div id="feedback" class="mt-4" style="display: none;">
+        <div class="alert" id="feedback-text"></div>
+        <button id="next-button" class="btn btn-lg btn-primary" style="display: none;">Next Question</button>
     </div>
 </div>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+function submitDecision(decision, amount) {
+    // Disable all buttons
+    document.querySelectorAll('.action-button').forEach(btn => btn.disabled = true);
+    
+    fetch('/submit-decision', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            decision: decision,
+            amount: amount,
+            quiz_id: {{ quiz.id }}
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Show feedback
+        const feedbackDiv = document.getElementById('feedback');
+        const feedbackText = document.getElementById('feedback-text');
+        const nextButton = document.getElementById('next-button');
+        
+        feedbackDiv.style.display = 'block';
+        feedbackText.textContent = data.feedback;
+        feedbackText.className = 'alert ' + (data.is_correct ? 'alert-success' : 'alert-danger');
+        
+        // Show next button or results link
+        if (data.next_quiz) {
+            nextButton.style.display = 'block';
+            nextButton.onclick = () => window.location.href = `/play/${data.next_quiz}`;
+        } else {
+            nextButton.style.display = 'block';
+            nextButton.textContent = 'See Results';
+            nextButton.onclick = () => window.location.href = '/results';
+        }
+    });
+}
+</script>
 {% endblock %}
