@@ -1,37 +1,347 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="learn-container">
-    <h1>Learn Poker Pre-Flop Betting</h1>
+  <h1>Learn Poker Pre-Flop Betting</h1>
+  <div class="lesson-content">
+    <h2>Lesson 2: Starting Hand Categories</h2>
+    <p>Understanding hand strength is crucial for pre-flop decisions:</p>
     
-    <div class="lesson-content">
-        <h2>Lesson 2: Starting Hand Categories</h2>
-        <p>Understanding hand strength is crucial for pre-flop decisions:</p>
-        
+    <div class="hand-container">
+      <div class="hand-categories">
         <h3>Premium Hands</h3>
         <p>Always play aggressively with these hands from any position:</p>
         <ul>
-            <li><strong>AA, KK, QQ</strong> - The big pairs</li>
-            <li><strong>AKs</strong> - Ace-King suited</li>
+          <li data-hand="AA"><strong>AA, KK, QQ</strong> - The big pairs</li>
+          <li data-hand="AKs"><strong>AKs</strong> - Ace-King suited</li>
         </ul>
         
         <h3>Strong Hands</h3>
         <p>Consider position, but generally playable:</p>
         <ul>
-            <li><strong>JJ, TT, 99</strong> - Medium pairs</li>
-            <li><strong>AQs, AJs, KQs</strong> - Strong suited connectors</li>
+          <li data-hand="JJ"><strong>JJ, TT, 99</strong> - Medium pairs</li>
+          <li data-hand="AQs"><strong>AQs, AJs, KQs</strong> - Strong suited connectors</li>
         </ul>
         
         <h3>Speculative Hands</h3>
         <p>Play more cautiously, better in late position:</p>
         <ul>
-            <li><strong>88-22</strong> - Small pairs</li>
-            <li><strong>KJs, QJs, JTs</strong> - Suited connectors</li>
+          <li data-hand="88"><strong>88-22</strong> - Small pairs</li>
+          <li data-hand="KJs"><strong>KJs, QJs, JTs</strong> - Suited connectors</li>
         </ul>
+      </div>
+      
+      <div class="card-display">
+        <div id="card-image">
+          <p>Hover over a hand to see the cards</p>
+        </div>
+        <div id="hand-description"></div>
+      </div>
     </div>
-    
-    <div class="lesson-navigation">
-        <a href="/learn" class="lesson-nav-button">Back</a>
-        <a href="/learn/3" class="lesson-nav-button">Next</a>
-    </div>
+  </div>
+  
+  <div class="lesson-navigation">
+    <a href="/learn" class="lesson-nav-button">Back</a>
+    <a href="/learn/3" class="lesson-nav-button">Next</a>
+  </div>
 </div>
+
+<style>
+  .hand-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .hand-categories {
+    flex: 1;
+  }
+  
+  .card-display {
+    flex: 1;
+    position: sticky;
+    top: 2rem;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  #card-image {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #hand-description {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .hand-categories ul li {
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .hand-categories ul li:hover {
+    background-color: #e9f0ff;
+  }
+  
+  .card {
+    display: inline-block;
+    width: 70px;
+    height: 100px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 0 5px;
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 100px;
+  }
+  
+  .card.red {
+    color: #d40000;
+  }
+  
+  .card.black {
+    color: #000;
+  }
+  
+  .card::before {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 14px;
+  }
+  
+  .card::after {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 14px;
+    transform: rotate(180deg);
+  }
+  
+  .card.hearts::before, .card.hearts::after {
+    content: "♥";
+  }
+  
+  .card.diamonds::before, .card.diamonds::after {
+    content: "♦";
+  }
+  
+  .card.clubs::before, .card.clubs::after {
+    content: "♣";
+  }
+  
+  .card.spades::before, .card.spades::after {
+    content: "♠";
+  }
+  
+  @media (max-width: 768px) {
+    .hand-container {
+      flex-direction: column;
+    }
+    
+    .card-display {
+      position: static;
+      order: -1;
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const handElements = document.querySelectorAll('.hand-categories ul li');
+    const cardImage = document.getElementById('card-image');
+    const handDescription = document.getElementById('hand-description');
+    
+    const handData = {
+      'AA': {
+        cards: [
+          { value: 'A', suit: 'spades', color: 'black' },
+          { value: 'A', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Aces - The strongest starting hand in poker. Play aggressively in all positions.'
+      },
+      'KK': {
+        cards: [
+          { value: 'K', suit: 'spades', color: 'black' },
+          { value: 'K', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Kings - The second strongest starting hand. Be cautious if an Ace appears on the flop.'
+      },
+      'QQ': {
+        cards: [
+          { value: 'Q', suit: 'spades', color: 'black' },
+          { value: 'Q', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Queens - Strong premium hand. Be cautious when facing heavy action if an Ace or King appears.'
+      },
+      'AKs': {
+        cards: [
+          { value: 'A', suit: 'hearts', color: 'red' },
+          { value: 'K', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Ace-King suited - The strongest non-pair starting hand. Has good potential for flush and straight draws.'
+      },
+      'JJ': {
+        cards: [
+          { value: 'J', suit: 'spades', color: 'black' },
+          { value: 'J', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Jacks - Strong hand but vulnerable to overcards. Play carefully when facing heavy action.'
+      },
+      'TT': {
+        cards: [
+          { value: 'T', suit: 'spades', color: 'black' },
+          { value: 'T', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Tens - Solid medium pair. Often requires careful post-flop play against overcards.'
+      },
+      '99': {
+        cards: [
+          { value: '9', suit: 'spades', color: 'black' },
+          { value: '9', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Nines - Decent medium pair. Can play aggressively in position but exercise caution.'
+      },
+      'AQs': {
+        cards: [
+          { value: 'A', suit: 'diamonds', color: 'red' },
+          { value: 'Q', suit: 'diamonds', color: 'red' }
+        ],
+        description: 'Ace-Queen suited - Strong starter with flush potential. Good for raises in most positions.'
+      },
+      'AJs': {
+        cards: [
+          { value: 'A', suit: 'clubs', color: 'black' },
+          { value: 'J', suit: 'clubs', color: 'black' }
+        ],
+        description: 'Ace-Jack suited - Good starting hand with straight and flush potential.'
+      },
+      'KQs': {
+        cards: [
+          { value: 'K', suit: 'diamonds', color: 'red' },
+          { value: 'Q', suit: 'diamonds', color: 'red' }
+        ],
+        description: 'King-Queen suited - Strong connector with straight and flush potential.'
+      },
+      '88': {
+        cards: [
+          { value: '8', suit: 'spades', color: 'black' },
+          { value: '8', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Eights - Upper end of small pairs. Good for set-mining.'
+      },
+      '77': {
+        cards: [
+          { value: '7', suit: 'spades', color: 'black' },
+          { value: '7', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Sevens - Small pair with set potential. Play cautiously.'
+      },
+      '66': {
+        cards: [
+          { value: '6', suit: 'spades', color: 'black' },
+          { value: '6', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Pocket Sixes - Small pair good for set-mining. Better in late position.'
+      },
+      'KJs': {
+        cards: [
+          { value: 'K', suit: 'clubs', color: 'black' },
+          { value: 'J', suit: 'clubs', color: 'black' }
+        ],
+        description: 'King-Jack suited - Decent speculative hand with straight and flush potential.'
+      },
+      'QJs': {
+        cards: [
+          { value: 'Q', suit: 'hearts', color: 'red' },
+          { value: 'J', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Queen-Jack suited - Connected cards with straight and flush potential.'
+      },
+      'JTs': {
+        cards: [
+          { value: 'J', suit: 'diamonds', color: 'red' },
+          { value: 'T', suit: 'diamonds', color: 'red' }
+        ],
+        description: 'Jack-Ten suited - Strong connector with good straight and flush potential.'
+      }
+    };
+    
+    function displayCards(handType) {
+      if (handData[handType]) {
+        // Clear previous content
+        cardImage.innerHTML = '';
+        
+        // Create card elements
+        handData[handType].cards.forEach(card => {
+          const cardElement = document.createElement('div');
+          cardElement.className = `card ${card.color} ${card.suit}`;
+          cardElement.textContent = card.value;
+          cardImage.appendChild(cardElement);
+        });
+        
+        // Set description
+        handDescription.textContent = handData[handType].description;
+      }
+    }
+    
+    // Event listeners for hover
+    handElements.forEach(element => {
+      const handType = element.getAttribute('data-hand');
+      
+      // For hover effect on desktop
+      element.addEventListener('mouseenter', function() {
+        displayCards(handType);
+      });
+      
+      // For touch devices
+      element.addEventListener('click', function() {
+        displayCards(handType);
+      });
+    });
+    
+    // Reset to default when not hovering over any hand
+    handElements.forEach(element => {
+      element.addEventListener('mouseleave', function() {
+        // Only reset if not hovering over another hand element
+        const isHoveringAnyHand = Array.from(handElements).some(el => 
+          el.matches(':hover')
+        );
+        
+        if (!isHoveringAnyHand) {
+          cardImage.innerHTML = '<p>Hover over a hand to see the cards</p>';
+          handDescription.textContent = '';
+        }
+      });
+    });
+    
+    // Handle the multi-hand items (like "AA, KK, QQ")
+    document.querySelector('[data-hand="AA"]').addEventListener('mouseenter', function() {
+      displayCards('AA');
+    });
+    
+    document.querySelector('[data-hand="JJ"]').addEventListener('mouseenter', function() {
+      displayCards('JJ');
+    });
+    
+    // Show default message
+    cardImage.innerHTML = '<p>Hover over a hand to see the cards</p>';
+  });
+</script>
 {% endblock %}
