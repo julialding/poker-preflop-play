@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="learn-container">
+    <h1>Learn: Betting strategy</h1>
+    
+    <div class="lesson-content">
+        <h2>First, what hands could our opponents have? And, what <u>range</u> of hands might they think we have?</h2>
+        
+        <div class="text-center my-4">
+            <img src="{{ url_for('static', filename='images/betting_strategy.png') }}" 
+                 alt="Poker Table Strategy" 
+                 class="img-fluid rounded" 
+                 style="max-width: 600px;">
+        </div>
+
+        <div class="range-info mt-4">
+            <h3>What range might a normal player in this big blind spot have?</h3>
+            <ul class="list-unstyled">
+                <li>• Garbage hands</li>
+                <li>• 10s+, AQ+, bluffs</li>
+                <li>• Any king or ace or pocket pair</li>
+            </ul>
+        </div>
+
+        <div class="action-buttons mt-4 d-flex justify-content-center gap-3">
+            <button class="btn btn-outline-secondary px-4">Call 60</button>
+            <button class="btn btn-outline-primary px-4">4-bet 150</button>
+            <button class="btn btn-outline-danger px-4">All in 200</button>
+            <button class="btn btn-outline-dark px-4">Fold</button>
+        </div>
+    </div>
+    
+    <div class="lesson-navigation mt-4">
+        <a href="/learn/3" class="btn btn-secondary lesson-nav-button">Back</a>
+        <a href="/play/1" class="btn btn-primary lesson-nav-button">Practice!</a>
+    </div>
+</div>
+
+<style>
+.range-info {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.range-info ul li {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.lesson-navigation {
+    display: flex;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.lesson-nav-button {
+    min-width: 100px;
+}
+</style>
+{% endblock %}
