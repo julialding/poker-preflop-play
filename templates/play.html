@@ -5,17 +5,40 @@
     <p class="lead">{{ quiz.description }}</p>
 
     <div class="practice-area">
-        <img src="{{ url_for('static', filename='images/' + quiz.image) }}"
-            alt="{{ quiz.title }}" 
-            class="img-fluid rounded" 
-            style="max-width: 600px;">
+        <div class="poker-table">
+            <div class="seat seat-0">
+                <div class="folded-cards"></div>
+            </div>
+            <div class="seat seat-1">
+                <div class="active-cards"></div>
+                <div class="bet-amount">12</div>
+            </div>
+            <div class="seat seat-2">
+                <div class="folded-cards"></div>
+                <span class="dealer">D</span>
+            </div>
+            <div class="seat seat-3" id="card-holder">
+                <div class="bet-amount">2</div>
+            </div>
+            <div class="seat seat-4">
+                <div class="active-cards"></div>
+                <div class="bet-amount">4</div>
+            </div>
+            <div class="seat seat-5">
+                <div class="folded-cards"></div>
+            </div>
+
+            <div class="table-info">
+                 <!-- Can add info here if we want -->
+            </div>
+        </div>
     </div>
     
-    <div class="action-buttons-container" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-        <button class="btn btn-secondary action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Call', {{ quiz.buttons.call.amount }})">Call {{ quiz.buttons.call.amount }}</button>
-        <button class="btn btn-primary action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Raise', {{ quiz.buttons.raise.amount }})">Raise {{ quiz.buttons.raise.amount }}</button>
-        <button class="btn btn-danger action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('AllIn', {{ quiz.buttons.allin.amount }})">All in {{ quiz.buttons.allin.amount }}</button>
-        <button class="btn btn-dark action-button" style="min-width: 120px; font-size: 1.2em; padding: 15px;" onclick="submitDecision('Fold', {{ quiz.buttons.fold.amount }})">Fold</button>
+    <div class="action-buttons-container">
+        <button class="btn btn-secondary action-button" onclick="submitDecision('Call', {{ quiz.buttons.call.amount }})">Call {{ quiz.buttons.call.amount }}</button>
+        <button class="btn btn-primary action-button" onclick="submitDecision('Raise', {{ quiz.buttons.raise.amount }})">Raise {{ quiz.buttons.raise.amount }}</button>
+        <button class="btn btn-danger action-button" onclick="submitDecision('AllIn', {{ quiz.buttons.allin.amount }})">All in {{ quiz.buttons.allin.amount }}</button>
+        <button class="btn btn-dark action-button" onclick="submitDecision('Fold', {{ quiz.buttons.fold.amount }})">Fold</button>
     </div>
 
     <div id="feedback" class="mt-4" style="display: none;">
@@ -24,7 +47,375 @@
     </div>
 </div>
 
+<style>
+.practice-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.practice-container h1 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.practice-container .lead {
+    margin-bottom: 10px;
+}
+
+.practice-area {
+    margin: 10px auto;
+}
+
+.poker-table {
+    position: relative;
+    width: 450px;
+    height: 300px;
+    margin: 1rem auto;
+    background: #1b7a3d;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    border: 15px solid #4a3626;
+}
+
+.seat {
+    position: absolute;
+    width: 80px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seat span {
+    background: #2a2a2a;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-family: monospace;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.dealer {
+    position: absolute;
+    top: 50px;
+    right: -45px;
+    background: #cc0000 !important;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 0.9em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.seat-0 { 
+    top: -25px; 
+    left: 48%;        /* Moved left from 50% */
+    transform: translateX(-50%); 
+}
+
+.seat-1 { 
+    top: 20px;        /* Moved up from 35px */
+    right: 60px;      /* Moved left (bigger number = more left) */
+}
+
+.seat-2 { 
+    bottom: 60px;     /* Moved down more (from 80px) */
+    right: 70px;      
+}
+
+.seat-3 { 
+    bottom: -10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+}
+
+.seat-4 { 
+    bottom: 60px;    /* Moved down more (from 90px) */
+    left: 30px;      
+}
+
+.seat-5 { 
+    top: 20px;      /* Moved up more (from 35px) */
+    left: 30px;     
+}
+
+.hidden-cards::before, .hidden-cards::after {
+    content: '';
+    width: 35px;
+    height: 50px;
+    background: #2a2a2a;
+    position: absolute;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    border: 1px solid #333333;
+}
+
+.hidden-cards::after {
+    left: 15px;
+}
+
+.card {
+    width: 30px;
+    height: 45px;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    margin: 0 3px;
+    font-weight: bold;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.card::before, .card::after {
+    position: absolute;
+    font-size: 12px;
+}
+
+.card::before {
+    top: 2px;
+    left: 2px;
+}
+
+.card::after {
+    bottom: 2px;
+    right: 2px;
+    transform: rotate(180deg);
+}
+
+.card.hearts::before, .card.hearts::after { content: "♥"; }
+.card.diamonds::before, .card.diamonds::after { content: "♦"; }
+.card.clubs::before, .card.clubs::after { content: "♣"; }
+.card.spades::before, .card.spades::after { content: "♠"; }
+
+.red { color: #cc0000; }
+.black { color: #000000; }
+
+.table-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.pot, .current-bet {
+    margin: 5px 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.action-buttons-container {
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.action-button {
+    min-width: 110px !important;
+    font-size: 1.1em !important;
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    letter-spacing: 0.5px;
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.folded-cards {
+    position: relative;
+}
+
+.folded-cards::before, .folded-cards::after {
+    content: '';
+    width: 35px;
+    height: 50px;
+    background: #2a2a2a;
+    position: absolute;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    border: 1px solid #333333;
+}
+
+.folded-cards::after {
+    left: 15px;
+}
+
+/* Default bet positioning */
+.bet-amount {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.85em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    background: #2a2a2a;
+    color: #ffffff;
+}
+
+/* seat-0: Top position */
+.seat-0 .bet-amount {
+    bottom: -15px;    
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* seat-1: Top right position */
+.seat-1 .bet-amount {
+    bottom: -15px;     
+    left: 10px;       
+}
+
+/* seat-2: Bottom right position */
+.seat-2 .bet-amount {
+    top: -8px;        
+    left: -8px;       
+}
+
+/* seat-3: Bottom position (player) */
+.seat-3 .bet-amount {
+    top: -5px;       
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5),  /* Outer white glow */
+                0 0 5px rgba(255, 255, 255, 0.3);    /* Inner white glow */
+    font-weight: 900;  /* Make the number slightly bolder */
+}
+
+/* seat-4: Bottom left position */
+.seat-4 .bet-amount {
+    top: 33px;        
+    right: -38px;      
+}
+
+/* seat-5: Top left position */
+.seat-5 .bet-amount {
+    bottom: -8px;     
+    right: -8px;      
+}
+
+.active-cards {
+    position: relative;
+}
+
+.active-cards::before, .active-cards::after {
+    content: '';
+    width: 35px;
+    height: 50px;
+    background: #ffffff;
+    position: absolute;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    border: 1px solid #333333;
+}
+
+.active-cards::after {
+    left: 15px;
+}
+
+#feedback {
+    margin-top: 15px;
+}
+
+.alert {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+
+#next-button {
+    padding: 8px 20px;
+    margin-top: 10px;
+}
+</style>
+
 <script>
+const handData = {
+    'AA': {
+        cards: [
+            { value: 'A', suit: 'spades', color: 'black' },
+            { value: 'A', suit: 'hearts', color: 'red' }
+        ]
+    },
+    'KK': {
+        cards: [
+            { value: 'K', suit: 'spades', color: 'black' },
+            { value: 'K', suit: 'hearts', color: 'red' }
+        ]
+    },
+    'QQ': {
+        cards: [
+            { value: 'Q', suit: 'spades', color: 'black' },
+            { value: 'Q', suit: 'hearts', color: 'red' }
+        ]
+    },
+    'AKs': {
+        cards: [
+            { value: 'A', suit: 'hearts', color: 'red' },
+            { value: 'K', suit: 'hearts', color: 'red' }
+        ]
+    },
+    'AKo': {
+        cards: [
+            { value: 'A', suit: 'hearts', color: 'red' },
+            { value: 'K', suit: 'spades', color: 'black' }
+        ]
+    },
+    '87s': {
+        cards: [
+            { value: '8', suit: 'hearts', color: 'red' },
+            { value: '7', suit: 'hearts', color: 'red' }
+        ]
+    },
+    '65s': {
+        cards: [
+            { value: '6', suit: 'hearts', color: 'red' },
+            { value: '5', suit: 'hearts', color: 'red' }
+        ]
+    }
+};
+
+function displayCards(handType) {
+    const cardHolder = document.getElementById('card-holder');
+    const hand = handData[handType];
+    
+    if (hand) {
+        // Save any existing bet amount div
+        const existingBet = cardHolder.querySelector('.bet-amount');
+        
+        // Clear the card holder
+        cardHolder.innerHTML = '';
+        
+        // Add the cards
+        hand.cards.forEach(card => {
+            const cardElement = document.createElement('div');
+            cardElement.className = `card ${card.color} ${card.suit}`;
+            cardElement.textContent = card.value;
+            cardHolder.appendChild(cardElement);
+        });
+        
+        // Add the bet amount with the special styling
+        const betAmount = document.createElement('div');
+        betAmount.className = 'bet-amount';
+        betAmount.textContent = '2';  // Set this to the player's current bet
+        cardHolder.appendChild(betAmount);
+    }
+}
+
 function submitDecision(decision, amount) {
     // Disable all buttons
     document.querySelectorAll('.action-button').forEach(btn => btn.disabled = true);
@@ -42,7 +433,6 @@ function submitDecision(decision, amount) {
     })
     .then(response => response.json())
     .then(data => {
-        // Show feedback
         const feedbackDiv = document.getElementById('feedback');
         const feedbackText = document.getElementById('feedback-text');
         const nextButton = document.getElementById('next-button');
@@ -51,7 +441,6 @@ function submitDecision(decision, amount) {
         feedbackText.textContent = data.feedback;
         feedbackText.className = 'alert ' + (data.is_correct ? 'alert-success' : 'alert-danger');
         
-        // Show next button or results link
         if (data.next_quiz) {
             nextButton.style.display = 'block';
             nextButton.onclick = () => window.location.href = `/play/${data.next_quiz}`;
@@ -62,5 +451,20 @@ function submitDecision(decision, amount) {
         }
     });
 }
+
+// Initialize the table with the player's hand
+document.addEventListener('DOMContentLoaded', function() {
+    // Extract hand type from the quiz title or description
+    const title = "{{ quiz.title }}".toLowerCase();
+    const description = "{{ quiz.description }}".toLowerCase();
+    
+    // Try to find a matching hand
+    for (const handType in handData) {
+        if (title.includes(handType.toLowerCase()) || description.includes(handType.toLowerCase())) {
+            displayCards(handType);
+            break;
+        }
+    }
+});
 </script>
 {% endblock %}
