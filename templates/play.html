@@ -6,33 +6,36 @@
 
     <div class="practice-area">
         <div class="poker-table">
-            <div class="seat seat-0">
-                <div class="folded-cards"></div>
-            </div>
-            <div class="seat seat-1">
-                <div class="active-cards"></div>
-                <div class="bet-amount">12</div>
-            </div>
-            <div class="seat seat-2">
-                <div class="folded-cards"></div>
-                <span class="dealer">D</span>
-            </div>
-            <div class="seat seat-3" id="card-holder">
-                <div class="bet-amount">2</div>
-            </div>
-            <div class="seat seat-4">
-                <div class="active-cards"></div>
-                <div class="bet-amount">4</div>
-            </div>
-            <div class="seat seat-5">
-                <div class="folded-cards"></div>
-            </div>
-
+            {% for seat in quiz.table_state %}
+                <div class="seat seat-{{ loop.index0 }} {% if loop.index0 == 3 %}card-holder{% endif %}">
+                    {% if seat.status == 'active' %}
+                        <div class="active-cards"></div>
+                    {% elif seat.status == 'folded' %}
+                        <div class="folded-cards"></div>
+                    {% endif %}
+    
+                    {% if seat.bet is defined %}
+                        <div class="bet-amount">{{ seat.bet }}</div>
+                    {% endif %}
+    
+                    {% if seat.dealer %}
+                        <span class="dealer">D</span>
+                    {% endif %}
+    
+                    {% if loop.index0 == 3 and seat.cards %}
+                        {% for card in seat.cards %}
+                            <div class="card {{ card.color }} {{ card.suit }}">{{ card.value }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+    
             <div class="table-info">
-                 <!-- Can add info here if we want -->
+                <!-- Optional center info like pot size -->
             </div>
         </div>
     </div>
+    
     
     <div class="action-buttons-container">
         <button class="btn btn-secondary action-button" onclick="submitDecision('Call', {{ quiz.buttons.call.amount }})">Call {{ quiz.buttons.call.amount }}</button>
@@ -270,8 +273,8 @@
 
 /* seat-0: Top position */
 .seat-0 .bet-amount {
-    bottom: -15px;    
-    left: 50%;
+    bottom: -32px;    
+    left: 75%;
     transform: translateX(-50%);
 }
 
@@ -283,8 +286,8 @@
 
 /* seat-2: Bottom right position */
 .seat-2 .bet-amount {
-    top: -8px;        
-    left: -8px;       
+    top: 95px;        
+    left: 15px;       
 }
 
 /* seat-3: Bottom position (player) */
@@ -305,8 +308,8 @@
 
 /* seat-5: Top left position */
 .seat-5 .bet-amount {
-    bottom: -8px;     
-    right: -8px;      
+    bottom: -20px;     
+    right: -35px;      
 }
 
 .active-cards {
