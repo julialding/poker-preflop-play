@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="learn-container">
+    <!-- Progress Bar -->
+    <div class="progress-container mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="progress-text">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+            <span class="progress-percentage"><span id="progress-percentage">0</span>%</span>
+        </div>
+        <div class="progress" style="height: 20px;">
+            <div id="learn-progress" class="progress-bar progress-bar-striped progress-bar-animated" 
+                 role="progressbar" 
+                 style="width: 0%" 
+                 aria-valuenow="0" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100">
+            </div>
+        </div>
+    </div>
+
+    {% block learn_content %}{% endblock %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current page number from URL
+    const path = window.location.pathname;
+    let currentPage;
+    
+    if (path === '/learn') {
+        currentPage = 1;
+    } else if (path.includes('/learn/')) {
+        currentPage = parseInt(path.split('/learn/')[1]);
+    } else {
+        currentPage = 1;
+    }
+    
+    // Total number of learn pages
+    const totalPages = 5;
+    
+    // Calculate progress
+    const progress = (currentPage / totalPages) * 100;
+    
+    // Update progress bar
+    const progressBar = document.getElementById('learn-progress');
+    progressBar.style.width = `${progress}%`;
+    progressBar.setAttribute('aria-valuenow', progress);
+    
+    // Update page numbers and percentage
+    document.getElementById('current-page').textContent = currentPage;
+    document.getElementById('total-pages').textContent = totalPages;
+    document.getElementById('progress-percentage').textContent = Math.round(progress);
+});
+</script>
+{% endblock %} 
