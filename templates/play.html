@@ -418,7 +418,26 @@ function displayCards(handType) {
         cardHolder.appendChild(betAmount);
     }
 }
-
+document.addEventListener('DOMContentLoaded', function() {
+    // Calculate progress
+    const currentQuizId = {{ quiz.id }};
+    fetch('/get-quiz-data')
+        .then(response => response.json())
+        .then(data => {
+            const totalQuizzes = data.quiz_pages.length;
+            const progress = (currentQuizId / totalQuizzes) * 100;
+            
+            // Update progress bar
+            const progressBar = document.getElementById('quiz-progress');
+            progressBar.style.width = `${progress}%`;
+            progressBar.setAttribute('aria-valuenow', progress);
+            
+            // Update question numbers and percentage
+            document.getElementById('current-question').textContent = currentQuizId;
+            document.getElementById('total-questions').textContent = totalQuizzes;
+            document.getElementById('progress-percentage').textContent = Math.round(progress);
+        });
+});
 function submitDecision(decision, amount) {
     // Disable all buttons
     document.querySelectorAll('.action-button').forEach(btn => btn.disabled = true);
