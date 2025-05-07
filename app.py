@@ -24,9 +24,13 @@ correct_decisions = {
 }
 
 @app.route('/')
-def index():
+def landing():
     # Record the time user enters the site
     session['start_time'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return render_template('start_page.html')
+
+@app.route('/home')
+def index():
     return render_template('home.html')
 
 @app.route('/reset')
