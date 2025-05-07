@@ -14,7 +14,18 @@
             "feedback": {
                 "correct": "Correct! Raising 12BB in early position with Aces is the optimal play.",
                 "incorrect": "Not quite. With Aces in early position, you want to raise to build the pot while not scaring away too many players."
-            }
+            },
+            "table_state": [
+                {"status": "active", "dealer": true},
+                {"status": "active", "bet": 2},
+                {"status": "active", "bet": 4},
+                {"cards": [
+                {"value": "A", "suit": "spades", "color": "black"},
+                {"value": "A", "suit": "diamonds", "color": "red"}
+                ]},
+                {"status": "active"},
+                {"status": "active"}
+            ]
         },
         {
             "id": 2,
@@ -30,7 +41,18 @@
             "feedback": {
                 "correct": "Correct! AKo is a strong hand that plays well in position against the raiser.",
                 "incorrect": "With AKo in the cutoff, raising is typically the best play to take initiative and potentially win without seeing a flop while dominating many strong hands like AQ and KQ."
-            }
+            },
+            "table_state": [
+                {"status": "active", "bet": 4},
+                {"status": "active", "bet": 16},
+                {"status": "folded"},
+                {"cards": [
+                {"value": "A", "suit": "spades", "color": "black"},
+                {"value": "K", "suit": "clubs", "color": "black"}
+                ]},
+                {"status": "active", "dealer": true},
+                {"status": "active", "bet": 2}
+            ]
         },
         {
             "id": 3,
@@ -46,7 +68,18 @@
             "feedback": {
                 "correct": "Correct! Out of position, we want to fold or 3-bet bluff -- this may get a nice fold from a stronger hand, or your cards still have great chances against big cards.",
                 "incorrect": "With suited connectors in the small blind, folding is safe and re-raising puts fold pressure on opponents and allows you to potentially win a big pot when you hit a straight or flush."
-            }
+            },
+            "table_state": [
+                {"status": "folded"},
+                {"status": "active", "bet": 12},
+                {"status": "folded", "dealer": true},
+                {"bet": 2, "cards": [
+                {"value": "7", "suit": "hearts", "color": "red"},
+                {"value": "8", "suit": "hearts", "color": "red"}
+                ]},
+                {"status": "active", "bet": 4},
+                {"status": "folded"}
+            ]
         },
         {
             "id": 4,
@@ -62,7 +95,18 @@
             "feedback": {
                 "correct": "Correct! Calling with suited connectors in position is a good play.",
                 "incorrect": "With suited connectors in the big blind, calling allows you to see a flop cheaply and potentially win a big pot when you hit."
-            }
+            },
+            "table_state": [
+                {"status": "folded"},
+                {"status": "active", "bet": 12},
+                {"status": "folded", "dealer": true},
+                {"bet": 2, "cards": [
+                {"value": "5", "suit": "hearts", "color": "red"},
+                {"value": "6", "suit": "hearts", "color": "red"}
+                ]},
+                {"status": "active", "bet": 4},
+                {"status": "folded"}
+            ]
         }
     ]
 } 
