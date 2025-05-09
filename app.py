@@ -24,9 +24,13 @@ correct_decisions = {
 }
 
 @app.route('/')
-def index():
+def landing():
     # Record the time user enters the site
     session['start_time'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return render_template('start_page.html')
+
+@app.route('/home')
+def index():
     return render_template('home.html')
 
 @app.route('/reset')
@@ -49,16 +53,20 @@ def learn_page(page_id):
         'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
     
-    if page_id == 2:
-        return render_template('learn_page_2.html')
-    elif page_id == 1:
-        return render_template('learn_page_1.html')
-    elif page_id == 3:
-        return render_template('learn_page_3.html')
-    elif page_id == 0:
-        return render_template('learn_page_0.html')
-    elif page_id == 4:
-        return render_template('learn_page_4.html')
+    # Map page IDs to templates
+    page_templates = {
+        0: 'learn_page_0.html',  # What is Pre-Flop?
+        1: 'learn_page_1.html',  # Table Positions
+        2: 'learn_page_2.html',  # Starting Hand Categories
+        3: 'learn_page_3.html',  # Pre-Flop Betting Strategies
+        4: 'learn_page_4.html'   # Betting Strategy
+    }
+    
+    template = page_templates.get(page_id)
+    if template:
+        return render_template(template)
+    else:
+        return redirect(url_for('learn'))
 
 @app.route('/play/<int:quiz_id>')
 def play(quiz_id):
@@ -80,6 +88,10 @@ def get_hand():
     session.setdefault('history', [])  # Initialize history if it doesn't exist
     
     return jsonify({"hand": hand, "position": position})
+
+@app.route('/get-quiz-data')
+def get_quiz_data():
+    return jsonify(quiz_data)
 
 @app.route('/submit-decision', methods=['POST'])
 def submit_decision():

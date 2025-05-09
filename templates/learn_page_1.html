@@ -1,121 +1,118 @@
-{% extends "layout.html" %}
-{% block content %}
-<div class="container mt-5">
-    <div class="learn-container">
-        <h1 class="text-center mb-4">Learn Poker Pre-Flop Betting</h1>
+{% extends "learn_base.html" %}
+{% block learn_content %}
+    <h1 class="text-center mb-4">Learn Poker Pre-Flop Betting</h1>
+    
+    <div class="card shadow-sm p-4">
+        <h2 class="card-title">Lesson 1: Table Positions</h2>
         
-        <div class="card shadow-sm p-4">
-            <h2 class="card-title">Lesson 1: Table Positions</h2>
-            
         <div class="lesson-content">
-                <h3 class="mb-3">Position Overview</h3>
-                <p>Pre-flop decisions are heavily influenced by your position at the table. Understanding position is crucial for successful poker play.</p>
-                <p class="text-muted mt-3"><i>Hover over different positions on the table image below to learn more about each position.</i></p>
+            <h3 class="mb-3">Position Overview</h3>
+            <p>Pre-flop decisions are heavily influenced by your position at the table. Understanding position is crucial for successful poker play.</p>
+            <p class="text-muted mt-3"><i>Hover over different positions on the table image below to learn more about each position.</i></p>
         </div>
-            <!-- Position Image with Interactive Areas -->
-<div class="text-center my-4">
-    <div class="poker-table-container">
-        <img src="{{ url_for('static', filename='images/poker_pos.png') }}" 
-             alt="Poker Table Positions" 
-             class="img-fluid rounded poker-table-img" 
-             style="max-width: 600px;">
-        
-        <!-- Clickable/Hoverable Areas -->
-        <div class="position-area early-position" data-position="early">
-            <!-- UTG Area -->
-        </div>
-        <div class="position-area middle-position" data-position="middle">
-            <!-- MP/HJ Area -->
-        </div>
-        <div class="position-area late-position" data-position="late">
-            <!-- CO/BTN Area -->
-        </div>
-        <div class="position-area deal-position" data-position="deal">
-            <!-- CO/BTN Area -->
-        </div>
-        <div class="position-area sb-position" data-position="sb">
-            <!-- SB Area -->
-        </div>
-        <div class="position-area bb-position" data-position="bb">
-            <!-- BB Area -->
-        </div>
-        
-        <!-- Description Cards -->
-        <div class="position-description-card" id="early-position-card">
-            <div class="card-pointer left-pointer"></div>
-            <h4 class="text-primary">Early Position (EP)</h4>
-            <ul>
-                <li>First positions to act after the blinds</li>
-                <li>Play tight range – premium hands only</li>
-                <li>Recommended hands: AA, KK, QQ, AKs</li>
-                <li>Most difficult position to play from</li>
-            </ul>
-        </div>
+        <!-- Position Image with Interactive Areas -->
+        <div class="text-center my-4">
+            <div class="poker-table-container">
+                <img src="{{ url_for('static', filename='images/poker_pos.png') }}" 
+                     alt="Poker Table Positions" 
+                     class="img-fluid rounded poker-table-img" 
+                     style="max-width: 600px;">
+                
+                <!-- Clickable/Hoverable Areas -->
+                <div class="position-area early-position" data-position="early">
+                    <!-- UTG Area -->
+                </div>
+                <div class="position-area middle-position" data-position="middle">
+                    <!-- MP/HJ Area -->
+                </div>
+                <div class="position-area late-position" data-position="late">
+                    <!-- CO/BTN Area -->
+                </div>
+                <div class="position-area deal-position" data-position="deal">
+                    <!-- CO/BTN Area -->
+                </div>
+                <div class="position-area sb-position" data-position="sb">
+                    <!-- SB Area -->
+                </div>
+                <div class="position-area bb-position" data-position="bb">
+                    <!-- BB Area -->
+                </div>
+                
+                <!-- Description Cards -->
+                <div class="position-description-card" id="early-position-card">
+                    <div class="card-pointer left-pointer"></div>
+                    <h4 class="text-primary">Early Position (EP)</h4>
+                    <ul>
+                        <li>First positions to act after the blinds</li>
+                        <li>Play tight range – premium hands only</li>
+                        <li>Recommended hands: AA, KK, QQ, AKs</li>
+                        <li>Most difficult position to play from</li>
+                    </ul>
+                </div>
 
-        <div class="position-description-card" id="middle-position-card">
-            <div class="card-pointer left-pointer"></div>
-            <h4 class="text-success">Middle Position (MP)</h4>
-            <ul>
-                <li>More flexibility than Early Position</li>
-                <li>Can play moderate range</li>
-                <li>Include premium hands and strong suited connectors</li>
-                <li>Consider players still to act</li>
-            </ul>
-        </div>
+                <div class="position-description-card" id="middle-position-card">
+                    <div class="card-pointer left-pointer"></div>
+                    <h4 class="text-success">Middle Position (MP)</h4>
+                    <ul>
+                        <li>More flexibility than Early Position</li>
+                        <li>Can play moderate range</li>
+                        <li>Include premium hands and strong suited connectors</li>
+                        <li>Consider players still to act</li>
+                    </ul>
+                </div>
 
-        <div class="position-description-card" id="late-position-card">
-            <div class="card-pointer right-pointer"></div>
-            <h4 class="text-info">Late Position (LP)</h4>
-            <ul>
-                <li>Best position to play from</li>
-                <li>Can play wider range of hands</li>
-                <li>Opportunity to steal blinds</li>
-                <li>More information about opponents' actions</li>
-            </ul>
-        </div>
+                <div class="position-description-card" id="late-position-card">
+                    <div class="card-pointer right-pointer"></div>
+                    <h4 class="text-info">Late Position (LP)</h4>
+                    <ul>
+                        <li>Best position to play from</li>
+                        <li>Can play wider range of hands</li>
+                        <li>Opportunity to steal blinds</li>
+                        <li>More information about opponents' actions</li>
+                    </ul>
+                </div>
 
-        <div class="position-description-card" id="deal-position-card">
-            <div class="card-pointer right-pointer"></div>
-            <h4 class="text-info">Late Position (LP)</h4>
-            <ul>
-                <li>Best position to play from</li>
-                <li>Can play wider range of hands</li>
-                <li>Opportunity to steal blinds</li>
-                <li>More information about opponents' actions</li>
-            </ul>
-        </div>
+                <div class="position-description-card" id="deal-position-card">
+                    <div class="card-pointer right-pointer"></div>
+                    <h4 class="text-info">Late Position (LP)</h4>
+                    <ul>
+                        <li>Best position to play from</li>
+                        <li>Can play wider range of hands</li>
+                        <li>Opportunity to steal blinds</li>
+                        <li>More information about opponents' actions</li>
+                    </ul>
+                </div>
 
-        <div class="position-description-card" id="sb-position-card">
-            <div class="card-pointer right-pointer"></div>
-            <h4 class="text-warning">Small Blind (SB)</h4>
-            <ul>
-                <li>Worst position post-flop</li>
-                <li>Already invested half a big blind</li>
-                <li>Play very selectively</li>
-                <li>Often caught out of position post-flop</li>
-            </ul>
-        </div>
+                <div class="position-description-card" id="sb-position-card">
+                    <div class="card-pointer right-pointer"></div>
+                    <h4 class="text-warning">Small Blind (SB)</h4>
+                    <ul>
+                        <li>Worst position post-flop</li>
+                        <li>Already invested half a big blind</li>
+                        <li>Play very selectively</li>
+                        <li>Often caught out of position post-flop</li>
+                    </ul>
+                </div>
 
-        <div class="position-description-card" id="bb-position-card">
-            <div class="card-pointer left-pointer"></div>
-            <h4 class="text-warning">Big Blind (BB)</h4>
-            <ul>
-                <li>Can defend more widely</li>
-                <li>Already invested a full big blind</li>
-                <li>Last to act pre-flop</li>
-                <li>Need to be selective with defense ranges</li>
-            </ul>
+                <div class="position-description-card" id="bb-position-card">
+                    <div class="card-pointer left-pointer"></div>
+                    <h4 class="text-warning">Big Blind (BB)</h4>
+                    <ul>
+                        <li>Can defend more widely</li>
+                        <li>Already invested a full big blind</li>
+                        <li>Last to act pre-flop</li>
+                        <li>Need to be selective with defense ranges</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <!-- Navigation Buttons -->
         <div class="d-flex justify-content-between mt-4">
-            <a href="/learn" class="btn btn-secondary">Back</a>
+            <a href="/learn/0" class="btn btn-secondary">Back</a>
             <a href="/learn/2" class="btn btn-primary">Next</a>
         </div>
     </div>
-</div>
 
 <style>
 .position-explanations .card {
