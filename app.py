@@ -38,11 +38,12 @@ def reset():
 
 @app.route('/learn')
 def learn():
-    return render_template('learn_pos.html')
+    return render_template('learn_page_0.html')
 
 @app.route('/learn/<int:page_id>')
 def learn_page(page_id):
     # Record when user accesses each learning page
+    
     session.setdefault('learning_history', []).append({
         'page': page_id,
         'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -51,13 +52,13 @@ def learn_page(page_id):
     if page_id == 2:
         return render_template('learn_page_2.html')
     elif page_id == 1:
-        return render_template('learn.html')
+        return render_template('learn_page_1.html')
     elif page_id == 3:
         return render_template('learn_page_3.html')
     elif page_id == 0:
         return render_template('learn_page_0.html')
-    else:
-        return render_template('learn_pos.html')
+    elif page_id == 4:
+        return render_template('learn_page_4.html')
 
 @app.route('/play/<int:quiz_id>')
 def play(quiz_id):
