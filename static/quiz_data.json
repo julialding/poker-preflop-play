@@ -85,26 +85,26 @@
             "id": 4,
             "title": "Big Blind with Small Suited Connectors",
             "image": "poker_65s_BB.png",
-            "description": "You're in the big blind with 65s facing a raise. What's your play?",
+            "description": "You're in the big blind with T8s facing a raise. What's your play?",
             "buttons": {
-                "call": {"amount": 4, "correct": true},
-                "raise": {"amount": 12, "correct": false},
+                "call": {"amount": 12, "correct": true},
+                "raise": {"amount": 30, "correct": false},
                 "allin": {"amount": 200, "correct": false},
                 "fold": {"amount": 0, "correct": false}
             },
             "feedback": {
-                "correct": "Correct! Calling with suited connectors in position is a good play.",
-                "incorrect": "With suited connectors in the big blind, calling allows you to see a flop cheaply and potentially win a big pot when you hit."
+                "correct": "Correct! From the big blind, we want to call with hands like suited gapper because we have a cheaper price and decent equity (30%+) against most hands.",
+                "incorrect": "Not quite. We do want to call here since we are in the big blind and have a cheap price to potentially hit a pair or stronger hand."
             },
             "table_state": [
-                {"status": "folded"},
                 {"status": "active", "bet": 12},
                 {"status": "folded", "dealer": true},
-                {"bet": 2, "cards": [
-                {"value": "5", "suit": "hearts", "color": "red"},
-                {"value": "6", "suit": "hearts", "color": "red"}
+                {"status": "folded", "bet": 2},
+                {"bet": 4, "cards": [
+                {"value": "10", "suit": "hearts", "color": "red"},
+                {"value": "8", "suit": "hearts", "color": "red"}
                 ]},
-                {"status": "active", "bet": 4},
+                {"status": "folded"},
                 {"status": "folded"}
             ]
         }
