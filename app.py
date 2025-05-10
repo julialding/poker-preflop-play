@@ -107,14 +107,29 @@ def submit_decision():
         button_info = quiz['buttons'].get(decision.lower())
         if button_info:
             is_correct = button_info['correct'] and button_info['amount'] == amount
-    
+            if is_correct:
+                correct_decision = decision
+                correct_amount = amount
+            else:
+                for key in quiz['buttons'].keys():
+                    if quiz['buttons'][key]['correct']:
+                        correct_decision = decision
+                        print(correct_decision)
+                        correct_amount = quiz['buttons'][key]['amount']
+
     # Store the decision in session history
     history = session.setdefault('quiz_history', [])
+    if decision == 'AllIn':
+        decision = "All In"
+    if correct_decision == 'AllIn':
+        correct_decision = "All In"
     history.append({
         'quiz_id': quiz_id,
         'decision': decision,
         'amount': amount,
         'is_correct': is_correct,
+        'correct_decision': correct_decision,
+        'correct_amount': correct_amount,
         'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
     session['quiz_history'] = history  # Explicitly update session
