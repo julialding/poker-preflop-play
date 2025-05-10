@@ -1,10 +1,13 @@
 {% extends "learn_base.html" %}
 {% block learn_content %}
 <div class="learn-container">
-    <h1>Learn: Betting strategy</h1>
+    <h1>Lesson 3: Betting strategy</h1>
     
     <div class="lesson-content">
-        <h2>First, what hands could our opponents have? And, what <u>range</u> of hands might they think we have?</h2>
+        If action folds to you, <u>raise</u> if you have a good enough hand (depending on position)! 
+        But what if someone reraises before or after you raise? Then, it's important to consider what <u>range</u> of hands they might have, and whether our hand is good enough to continue.
+
+        <h3>See the example below.</h3>
         
         <div class="text-center my-4">
             <img src="{{ url_for('static', filename='images/betting_strategy.png') }}" 
@@ -14,27 +17,45 @@
         </div>
 
         <div class="range-info mt-4">
-            <h3>What range might a normal player in this big blind spot have?</h3>
-            <ul class="list-unstyled">
-                <li>• Garbage hands</li>
-                <li>• 10s+, AQ+, bluffs</li>
-                <li>• Any king or ace or pocket pair</li>
-            </ul>
+            <h3>The big blind 3-bet your raise. What range of hands might they have here?</h3>
+            <div class="d-flex flex-column align-items-center gap-2">
+                <button class="btn btn-outline-secondary range-btn mb-2" onclick="showFeedback('anything')">Anything</button>
+                <button class="btn btn-outline-primary range-btn mb-2" onclick="showFeedback('stronger')">Stronger hands than mine, or bluffs</button>
+                <button class="btn btn-outline-success range-btn mb-2" onclick="showFeedback('weaker')">Mostly weaker hands than mine</button>
+            </div>
+            <div id="range-feedback" class="mt-3" style="display: none;">
+                <div class="alert" id="range-feedback-text"></div>
+            </div>
         </div>
 
-        <div class="action-buttons mt-4 d-flex justify-content-center gap-3">
-            <button class="btn btn-outline-secondary px-4">Call 60</button>
-            <button class="btn btn-outline-primary px-4">4-bet 150</button>
-            <button class="btn btn-outline-danger px-4">All in 200</button>
-            <button class="btn btn-outline-dark px-4">Fold</button>
-        </div>
     </div>
     
-    <div class="lesson-navigation mt-4">
-        <a href="/learn/3" class="btn btn-secondary lesson-nav-button">Back</a>
-        <a href="/play/1" class="btn btn-primary lesson-nav-button">Practice!</a>
+    <div class="lesson-navigation">
+        <a href="/learn/2" class="btn btn-primary lesson-nav-button">Back</a>
+        <a href="/play/1" id="practice-btn" class="btn btn-primary lesson-nav-button" style="display: none;">Practice!</a>
     </div>
 </div>
+
+<script>
+function showFeedback(answer) {
+    const feedbackDiv = document.getElementById('range-feedback');
+    const feedbackText = document.getElementById('range-feedback-text');
+    let message = '';
+    let alertClass = 'alert-danger';
+    if (answer === 'anything') {
+        message = 'Not quite. Even from the Big Blind, a 3-bet represents a strong range of hands.';
+    } else if (answer === 'stronger') {
+        message = 'Not quite. While a 3-bet usually represents a stronger range, the big blind usually raises wider and jacks is on the higher end of our range.';
+    } else if (answer === 'weaker') {
+        message = 'Correct! Jacks is a very strong hand, so we are likely to have a stronger hand even against this 3-bet';
+        alertClass = 'alert-success';
+    }
+    feedbackDiv.style.display = 'block';
+    feedbackText.textContent = message;
+    feedbackText.className = 'alert ' + alertClass;
+    document.getElementById('practice-btn').style.display = 'inline-block';
+}
+</script>
 
 <style>
 .range-info {
@@ -61,6 +82,14 @@ h2 {
 
 .lesson-nav-button {
     min-width: 100px;
+}
+
+.range-btn {
+    min-width: 320px;
+    font-size: 1.1em;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
 }
 </style>
 {% endblock %}
