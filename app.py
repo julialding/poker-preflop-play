@@ -58,7 +58,7 @@ def learn_page(page_id):
         0: 'learn_page_0.html',  # What is Pre-Flop?
         1: 'learn_page_1.html',  # Table Positions
         2: 'learn_page_2.html',  # Starting Hand Categories
-        3: 'learn_page_3.html',  # Pre-Flop Betting Strategies
+        3: 'learn_page_3.html',  # RENAME
         4: 'learn_page_4.html'   # Betting Strategy
     }
     
