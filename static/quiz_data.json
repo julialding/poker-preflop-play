@@ -31,7 +31,7 @@
             "id": 2,
             "title": "Ace King in Cutoff Facing Raise",
             "image": "poker_AKo_Cutoff.png",
-            "description": "You're in the cutoff with AKs. What's your play?",
+            "description": "You're in the cutoff with AKo. What's your play?",
             "buttons": {
                 "call": {"amount": 16, "correct": false},
                 "raise": {"amount": 50, "correct": true},
