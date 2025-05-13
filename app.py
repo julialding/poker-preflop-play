@@ -98,49 +98,54 @@ def get_hand():
 def get_quiz_data():
     return jsonify(quiz_data)
 
+def format_decision(decision):
+    mapping = {
+        'allin': 'All In',
+        'raise': 'Raise',
+        'call': 'Call',
+        'fold': 'Fold'
+    }
+    return mapping.get(decision.lower(), decision.capitalize())
+
 @app.route('/submit-decision', methods=['POST'])
 def submit_decision():
     data = request.get_json()
     decision = data.get('decision')
     amount = data.get('amount', 0)
     quiz_id = data.get('quiz_id')
-    
-    # Find the quiz data and check if answer is correct
     quiz = next((q for q in quiz_data['quiz_pages'] if q['id'] == quiz_id), None)
     is_correct = False
+    correct_decisions = []
     if quiz:
         button_info = quiz['buttons'].get(decision.lower())
         if button_info:
             is_correct = button_info['correct'] and button_info['amount'] == amount
             if is_correct:
-                correct_decision = decision
-                correct_amount = amount
+                correct_decisions.append({'decision': decision, 'amount': amount})
             else:
-                for key in quiz['buttons'].keys():
-                    if quiz['buttons'][key]['correct']:
-                        correct_decision = decision
-                        print(correct_decision)
-                        correct_amount = quiz['buttons'][key]['amount']
-
+                for key, btn in quiz['buttons'].items():
+                    if btn['correct']:
+                        correct_decisions.append({'decision': key, 'amount': btn['amount']})
+    # Format all correct decisions for display
+    formatted_correct_decisions = [
+        f"{format_decision(cd['decision'])}{f' ({cd["amount"]})' if cd['amount'] > 0 else ''}"
+        for cd in correct_decisions
+    ]
+    correct_decision_str = ', '.join(formatted_correct_decisions)
     # Store the decision in session history
     history = session.setdefault('quiz_history', [])
-    if decision == 'AllIn':
-        decision = "All In"
-    if correct_decision == 'AllIn':
-        correct_decision = "All In"
+    display_decision = format_decision(decision)
     history.append({
         'quiz_id': quiz_id,
-        'decision': decision,
+        'decision': display_decision,
         'amount': amount,
         'is_correct': is_correct,
-        'correct_decision': correct_decision,
-        'correct_amount': correct_amount,
+        'correct_decision': correct_decision_str,
+        'correct_amount': None,  # Not used anymore
         'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
     session['quiz_history'] = history  # Explicitly update session
-    
     feedback = quiz['feedback']['correct'] if is_correct else quiz['feedback']['incorrect']
-    
     return jsonify({
         "status": "success",
         "is_correct": is_correct,

@@ -30,7 +30,6 @@
                 {% if not entry.is_correct %}
                 <p class="mb-1 text-dark">
                     <strong>Correct answer:</strong> {{ entry.correct_decision }}
-                    {% if entry.correct_amount > 0 %}<span class="text-info">({{ entry.correct_amount }})</span>{% endif %}
                 </p>
                 {% endif %}
                 <span class="badge 
