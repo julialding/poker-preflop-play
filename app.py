@@ -35,9 +35,14 @@ def index():
 
 @app.route('/reset')
 def reset():
-    # Clear quiz history and redirect to first question
+    # Clear quiz history and redirect to first question or learn/practice page
     if 'quiz_history' in session:
         session.pop('quiz_history')
+    next_page = request.args.get('next')
+    if next_page == 'learn':
+        return redirect(url_for('learn'))
+    if next_page == 'practice':
+        return redirect(url_for('play', quiz_id=1))
     return redirect(url_for('play', quiz_id=1))
 
 @app.route('/learn')

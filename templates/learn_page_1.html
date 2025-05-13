@@ -2,13 +2,13 @@
 {% block learn_content %}
     
     <div class="card p-4 mt-0 beige-background" style="border: none;">
-        <h2 class="card-title mt-0">Lesson 1: Table Positions</h2>
+        <h2 class="card-title mt-0">Lesson 1: Table Positions (6 players)</h2>
     
         <div class="lesson-content mt-0 mb-0">
-            <h3 class="mt-0 mb-3">Why does position matter</h3>
-            <p>Pre-flop decisions are heavily influenced by your position at the table.</p>
-            <p>First to act is the player clockwise of the Big Blind. </p>
-            <p class="text-muted mt-3"><i>Hover over different positions on the table image below to learn more about each position.</i></p>
+            <h3 class="mt-0 mb-3">Why does position matter?</h3>
+            <p>Pre-flop position is actually very important! The actions people take in Poker gives information, so players acting earlier have less information about other players' hands.</p>
+            <p>Therefore, they should play a smaller <b>range</b> of hands (play "tighter"). The later in position you are, the more hands you can play profitably.</p>
+            <p class="text-muted mt-3"><i>Hover over different positions on the table image below to learn more about each position! Action starts at UTG.</i></p>
         </div>
         <!-- Position Image with Interactive Areas -->
         <div class="text-center mb-0 mt-0 my-4">
@@ -41,45 +41,45 @@
                 <!-- Description Cards -->
                 <div class="position-description-card" id="early-position-card">
                     <div class="card-pointer left-pointer"></div>
-                    <h4 class="text-primary">Early Position (EP)</h4>
+                    <h4 class="text-primary">Under The Gun (UTG)</h4>
                     <ul>
-                        <li>First positions to act after the blinds</li>
-                        <li>Play tight range – premium hands only</li>
-                        <li>Recommended hands: AA, KK, QQ, AKs</li>
-                        <li>Most difficult position to play from</li>
+                        <li>First player to act pre-flop</li>
+                        <li>Play (call/raise) a very tight range</li>
+                        <li>After the flop, UTG acts after blinds but before everyone else</li>
+                        <li>UTG raise is usually very strong</li>
                     </ul>
                 </div>
 
                 <div class="position-description-card" id="middle-position-card">
                     <div class="card-pointer left-pointer"></div>
-                    <h4 class="text-success">Middle Position (MP)</h4>
+                    <h4 class="text-success">Middle Position aka Hijack (MP/HJ)</h4>
                     <ul>
-                        <li>More flexibility than Early Position</li>
-                        <li>Can play moderate range</li>
-                        <li>Include premium hands and strong suited connectors</li>
-                        <li>Consider players still to act</li>
+                        <li>Still pretty early, but a bit more flexibility than UTG</li>
+                        <li>Can play a moderate, but still strong range</li>
+                        <li>If UTG has called the big blind ("limped"), consider raising a strong hand</li>
+                        <li>Always consider players still to act</li>
                     </ul>
                 </div>
 
                 <div class="position-description-card" id="late-position-card">
                     <div class="card-pointer right-pointer"></div>
-                    <h4 class="text-info">Late Position (LP)</h4>
+                    <h4 class="text-info">Cutoff (CO)</h4>
                     <ul>
-                        <li>Best position to play from</li>
-                        <li>Can play wider range of hands</li>
-                        <li>Opportunity to steal blinds</li>
-                        <li>More information about opponents' actions</li>
+                        <li>Good late position</li>
+                        <li>Can raise a wider range if action has folded to you</li>
+                        <li>But, still three players behind you pre-flop, and one post-flop</li>
+                        <li>Be wary of the player on the Button</li>
                     </ul>
                 </div>
 
                 <div class="position-description-card" id="deal-position-card">
                     <div class="card-pointer right-pointer"></div>
-                    <h4 class="text-info">Late Position (LP)</h4>
+                    <h4 class="text-info">Button / Dealer (D)</h4>
                     <ul>
-                        <li>Best position to play from</li>
+                        <li>Most profitable position to play from - goes last post-flop</li>
                         <li>Can play wider range of hands</li>
-                        <li>Opportunity to steal blinds</li>
-                        <li>More information about opponents' actions</li>
+                        <li>Opportunity to steal blinds by raising if action folds to you</li>
+                        <li>More information about opponents' actions both now and post-flop</li>
                     </ul>
                 </div>
 
@@ -87,10 +87,10 @@
                     <div class="card-pointer right-pointer"></div>
                     <h4 class="text-warning">Small Blind (SB)</h4>
                     <ul>
-                        <li>Worst position post-flop</li>
                         <li>Already invested half a big blind</li>
-                        <li>Play very selectively</li>
-                        <li>Often caught out of position post-flop</li>
+                        <li>Play selectively and don't be afraid to fold the blind </li>
+                        <li>Acts first post-flop</li>
+                        <li>Often raise rather than call to avoid a flop if possible</li>
                     </ul>
                 </div>
 
@@ -98,10 +98,10 @@
                     <div class="card-pointer left-pointer"></div>
                     <h4 class="text-warning">Big Blind (BB)</h4>
                     <ul>
-                        <li>Can defend more widely</li>
-                        <li>Already invested a full big blind</li>
                         <li>Last to act pre-flop</li>
-                        <li>Need to be selective with defense ranges</li>
+                        <li>Can call raises ("defend") with wider range due to cheaper price</li>
+                        <li>If action has folded/limped to you, raise the widest range of hands</li>
+                        <li>Get guaranteed flops with any hand if betting limps around</li>
                     </ul>
                 </div>
             </div>

@@ -1,33 +1,38 @@
 {% extends "learn_base.html" %}
 {% block learn_content %}
 <div class="learn-container beige-background">
-  <h1 class="mb-0"><b>Learn Poker Pre-Flop Betting</b></h1>
   <div class="lesson-content mt-0 mb-0">
     <h2>Lesson 2: Starting Hand Categories</h2>
-    <p>Understanding hand strength is crucial for pre-flop decisions:</p>
+    <p>Understanding relative hand strength is crucial for pre-flop decisions.</p>
+    <p>Hands that look bad often have decent probabilities of winning if little pre-flop betting occurs!</p>
     
     <div class="hand-container">
       <div class="hand-categories">
         <h3>Premium Hands</h3>
-        <p>Always play aggressively with these hands from any position:</p>
+        <p>Play aggressively (raise, 3-bet, often 4-bet) with these hands from any position:</p>
         <ul>
-          <li data-hand="AA"><strong>AA, KK, QQ</strong> - The big pairs</li>
-          <li data-hand="AKs"><strong>AKs</strong> - Ace-King suited</li>
+          <li data-hand="AA"><strong>AA, KK, QQ, JJ</strong> - The big pairs</li>
+          <li data-hand="AKs"><strong>AK, AQ</strong> - Strongest aces (especially if suited)</li>
         </ul>
         
         <h3>Strong Hands</h3>
-        <p>Consider position, but generally playable:</p>
+        <p>Consider action (raises/3bets before you), but generally play confidently:</p>
         <ul>
           <li data-hand="JJ"><strong>JJ, TT, 99</strong> - Medium pairs</li>
-          <li data-hand="AQs"><strong>AQs, AJs, KQs</strong> - Strong suited connectors</li>
+          <li data-hand="KQs"><strong>AJ, AT, KQ, QJ</strong> - Strong "Broadway" (face) cards</li>
         </ul>
         
-        <h3>Speculative Hands</h3>
-        <p>Play more cautiously, better in late position:</p>
+        <h3>Decent Hands</h3>
+        <p>Play more cautiously, better in late position, decent bluff-raise candidates:</p>
         <ul>
           <li data-hand="88"><strong>88-22</strong> - Small pairs</li>
-          <li data-hand="KJs"><strong>KJs, QJs, JTs</strong> - Suited connectors</li>
+          <li data-hand="QTo"><strong>QTo, JTs, 68s</strong> - Cards above 10 and suited connectors / gappers</li>
         </ul>
+
+        <h3>Weaker Hands</h3>
+        <p>Theoretically, play very selectively. Only raise for bluffing, only play from Big Blind or if opponents are playing loosely</p>
+        
+
       </div>
       
       <div class="card-display">
@@ -280,6 +285,13 @@
           { value: 'T', suit: 'diamonds', color: 'red' }
         ],
         description: 'Jack-Ten suited - Strong connector with good straight and flush potential.'
+      },
+      'QTo': {
+        cards: [
+          { value: 'Q', suit: 'spades', color: 'black' },
+          { value: 'T', suit: 'hearts', color: 'red' }
+        ],
+        description: 'Queen-Ten offsuit - Decent hand but weak against aggression.'
       }
     };
     
